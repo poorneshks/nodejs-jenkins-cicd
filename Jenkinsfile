@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
-        IMAGE_NAME = "kspoornesh/nodejs-jenkins-cicd"
+        DOCKER = credentials('dockerhub')
+        IMAGE = "kspoornesh/nodejs-jenkins-cicd"
     }
 
     stages {
@@ -15,29 +15,29 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $IMAGE_NAME:latest .'
+                sh 'docker build -t $IMAGE:latest .'
             }
         }
 
         stage('Login to Docker Hub') {
             steps {
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                sh 'echo $DOCKER_PSW | docker login -u $DOCKER_USR --password-stdin'
             }
         }
 
         stage('Push to Docker Hub') {
             steps {
-                sh 'docker push $IMAGE_NAME:latest'
+                sh 'docker push $IMAGE:latest'
             }
         }
     }
 
     post {
         success {
-            echo "Build Successful! Docker Image pushed to DockerHub."
+            echo "Build successful — Docker image pushed to DockerHub!"
         }
         failure {
-            echo "Build Failed!"
+            echo "Build failed!"
         }
     }
 }
