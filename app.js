@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
-    res.send('CI/CD Pipeline Test SUCCESSFUL! This is Version ks poornesh pipeline'); // <-- UPDATED MESSAGE
+    res.send('CI/CD Pipeline Test SUCCESSFUL! This is Version ks poornesh pipeline 2.0'); // <-- UPDATED MESSAGE
 });
 
 const PORT = 3000;
