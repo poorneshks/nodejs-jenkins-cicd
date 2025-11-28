@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
-    res.send('CI/CD Pipeline Test SUCCESSFUL! This is Version ks poornesh pipeline 2.0'); // <-- UPDATED MESSAGE
+    res.send('Hello from Node.js CI/CD Pipeline using Jenkins & Azure VM!');
 });
 
 const PORT = 3000;
-app.listen(PORT, () => console.log(`App running on port ${PORT}`));
+app.listen(PORT, () => console.log(`App running on port ${PORT}`)); is my app.js file contenet
