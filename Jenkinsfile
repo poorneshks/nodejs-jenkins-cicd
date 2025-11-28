@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
-        VM2_SSH = credentials('vm2ssh')
     }
 
     stages {
@@ -35,14 +34,16 @@ pipeline {
 
         stage('Deploy on VM2') {
             steps {
-                sh '''
-                ssh -o StrictHostKeyChecking=no azureuser2@4.213.117.188 << 'EOF'
-                docker pull kspoornesh/nodejs-jenkins-cicd:latest
-                docker stop nodeapp || true
-                docker rm nodeapp || true
-                docker run -d --name nodeapp -p 3000:3000 kspoornesh/nodejs-jenkins-cicd:latest
-                EOF
-                '''
+                sshagent(credentials: ['vm2ssh']) {
+                    sh '''
+                        ssh -o StrictHostKeyChecking=no azureuser2@4.213.117.188 "
+                            docker pull kspoornesh/nodejs-jenkins-cicd:latest &&
+                            docker stop nodeapp || true &&
+                            docker rm nodeapp || true &&
+                            docker run -d --name nodeapp -p 3000:3000 kspoornesh/nodejs-jenkins-cicd:latest
+                        "
+                    '''
+                }
             }
         }
     }
