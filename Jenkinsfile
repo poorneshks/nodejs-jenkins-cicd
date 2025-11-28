@@ -40,7 +40,7 @@ pipeline {
 
         stage('Deploy on VM2') {
             steps {
-                sshagent(credentials: ['vm2ssh']) {
+                sshagent(credentials: ['vm2-ssh']) { // FIXED: Changed 'vm2ssh' to 'vm2-ssh'
                     sh '''
                         ssh -o StrictHostKeyChecking=no azureuser2@4.213.117.188 "
                             docker pull kspoornesh/nodejs-jenkins-cicd:latest &&
