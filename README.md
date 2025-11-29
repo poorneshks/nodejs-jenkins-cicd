@@ -46,6 +46,39 @@ This project demonstrates an end-to-end CI/CD pipeline for a Node.js application
 ├── app.js                   # Sample Node.js application
 ├── package.json             
 └── README.md
-Update project README
+
+---
+
+## 🧪 Run Locally
+
+### Without Docker
+```bash
+git clone https://github.com/poorneshks/nodejs-jenkins-cicd.git
+cd nodejs-jenkins-cicd
+npm install
+npm start
+
+App will run on:
+http://localhost:3000
+
+docker build -t nodejs-jenkins-cicd .
+docker run -d -p 3000:3000 nodejs-jenkins-cicd
+
+
+---
+
+## **2️⃣ Docker manual commands section** → paste below the previous one
+
+```md
+---
+
+## 📦 Manual Docker Commands
+
+```bash
+docker build -t yourdockerhubusername/nodejs-jenkins-cicd:latest .
+docker push yourdockerhubusername/nodejs-jenkins-cicd:latest
+docker pull yourdockerhubusername/nodejs-jenkins-cicd:latest
+docker run -d -p 3000:3000 yourdockerhubusername/nodejs-jenkins-cicd:latest
+
 
 
