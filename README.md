@@ -1,84 +1,107 @@
-# Node.js CI/CD Pipeline with Jenkins, Docker & Azure VM
+# 🚀 Node.js CI/CD Pipeline with Jenkins, Docker & Azure VM
 
-This project demonstrates an end-to-end CI/CD pipeline for a Node.js application using:
+This project demonstrates a complete **CI/CD pipeline** for a Node.js application using:
 
-- Jenkins Pipeline (Multibranch/SCM)
-- Docker image build & push to Docker Hub
-- Automated deployment to Azure VM via SSH
-- GitHub webhook-based auto-trigger
+* **Jenkins Pipeline (Declarative)**
+* **Docker image build & push to Docker Hub**
+* **Automated deployment to Azure VM via SSH**
+* **GitHub Webhook auto-trigger**
+
+The goal is to achieve **end-to-end automation** from code commit → build → push → deploy.
 
 ---
 
-## 🚀 Pipeline Workflow
+## 🔄 Pipeline Workflow
 
-1. **Code Push to GitHub**  
-   → Webhook triggers Jenkins automatically.
+### **1. Code Push → GitHub Webhook**
 
-2. **Jenkins CI Stage**  
-   - Clone repository  
-   - Build Docker image  
-   - Authenticate & push image to Docker Hub  
+* Any commit to `main` triggers Jenkins automatically.
 
-3. **CD Deployment Stage**  
-   - SSH into Azure VM  
-   - Pull latest Docker image  
-   - Restart container with zero-downtime rollout  
+### **2. CI Stage (Jenkins)**
+
+* Clone repository
+* Build Docker image
+* Login & push image to Docker Hub
+
+### **3. CD Stage (Azure VM Deployment)**
+
+* Connect to Azure VM via SSH
+* Pull latest Docker image
+* Stop + remove old container
+* Run updated container
+* Deployment completes automatically
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Node.js** (App)
-- **Docker** (Containerization)
-- **Jenkins** (CI/CD Automation)
-- **Azure VM** (Deployment Target)
-- **Docker Hub** (Image Registry)
-- **GitHub Webhooks** (Triggering)
+* **Node.js** – Application
+* **Docker** – Containerization
+* **Jenkins** – CI/CD automation
+* **Azure VM (Ubuntu)** – Deployment target
+* **Docker Hub** – Image registry
+* **GitHub Webhooks** – Auto-triggering builds
 
 ---
 
 ## 📂 Repository Structure
-## 📂 Repository Structure
 
+```
 .
-├── Jenkinsfile              # CI/CD pipeline definition
-├── Dockerfile               # Node.js app container build
-├── app.js                   # Sample Node.js application
-├── package.json             
-└── README.md
+├── Jenkinsfile        # CI/CD pipeline definition
+├── Dockerfile         # Docker build instructions
+├── app.js             # Sample Node.js application
+├── package.json       # Dependencies & metadata
+└── README.md          # Project documentation
+```
 
 ---
 
 ## 🧪 Run Locally
 
-### Without Docker
+### **Without Docker**
+
 ```bash
 git clone https://github.com/poorneshks/nodejs-jenkins-cicd.git
 cd nodejs-jenkins-cicd
 npm install
 npm start
+```
 
-App will run on:
-http://localhost:3000
+App runs at → **[http://localhost:3000](http://localhost:3000)**
 
+---
+
+### **With Docker**
+
+```bash
 docker build -t nodejs-jenkins-cicd .
 docker run -d -p 3000:3000 nodejs-jenkins-cicd
-
+```
 
 ---
 
-## **2️⃣ Docker manual commands section** → paste below the previous one
-
-```md
----
-
-## 📦 Manual Docker Commands
+## 📦 Docker Manual Commands
 
 ```bash
 docker build -t yourdockerhubusername/nodejs-jenkins-cicd:latest .
 docker push yourdockerhubusername/nodejs-jenkins-cicd:latest
 docker pull yourdockerhubusername/nodejs-jenkins-cicd:latest
 docker run -d -p 3000:3000 yourdockerhubusername/nodejs-jenkins-cicd:latest
+```
 
+---
 
+## 📌 Highlights / What This Project Shows
 
+* Fully automated **CI/CD** pipeline
+* Docker-based deployment on Azure VM
+* Jenkins credential binding (SSH + DockerHub)
+* GitHub → Jenkins webhook automation
+* Real-world DevOps flow: **Build → Push → Deploy**
+
+---
+
+## 🙌 Contributions
+
+Pull requests are welcome!
